@@ -55,7 +55,7 @@ void main() // Fuzzy Logic (Tugas)
 	cout << "Jarak: " << distance << " | Kecepatan: " << speed << endl;
 	cout << "Berapa sudut rem?" << endl << endl;
 
-	// fuzzyfication
+	// fuzzyfikasi
 	cout << "Input Membership Function:" << endl;
 	u1x = imfDistance(0, 2, 6, distance);
 	u2x = imfDistance(2, 6, 10, distance);
@@ -68,7 +68,7 @@ void main() // Fuzzy Logic (Tugas)
 	printf("Kecepatan -> low: %.2f | medium: %.2f | high: %.2f\n", u1y, u2y, u3y);
 	cout << endl;
 
-	// interference
+	// interferensi
 	cout << "Interference System:" << endl;
 	// rule 1: IF Jarak SHORT && Kecepatan LOW THEN Sudut Rem MODERATE
 	minVal.push_back(min(u1x, u1y));
@@ -132,7 +132,7 @@ void main() // Fuzzy Logic (Tugas)
 	printf("Rem soft: %.0f\n", remVal[remVal.size()-1]);
 	cout << endl;
 
-	// defuzzyfication
+	// defuzzyfikasi
 	cout << "Output:" << endl;
 	for (int i = 0; i < minVal.size(); i++) {
 		num += minVal[i] * remVal[i];

@@ -19,14 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="praktikum1.cpp" />
-    <ClCompile Include="praktikum2a.cpp" />
-    <ClCompile Include="praktikum2b.cpp" />
-    <ClCompile Include="praktikum3.cpp" />
-    <ClCompile Include="praktikum4.cpp" />
-    <ClCompile Include="praktikum5.cpp" />
-    <ClCompile Include="praktikum6.cpp" />
-    <ClCompile Include="praktikum7.cpp" />
+    <ClCompile Include="praktikum12a.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

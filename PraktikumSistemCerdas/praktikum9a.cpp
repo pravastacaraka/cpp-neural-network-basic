@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
@@ -15,36 +16,34 @@ using namespace std;
  *	Produksi: Berkurang (<7000) | Bertambah (>2000)
  */
 
-float imfPermintaan(float a, float b, float z) 
+// membership function turun/sedikit/menurun
+float imfDown(float a, float b, float z)
 {
-	float resPermintaan;
-	if ((z >= a) && (z < b)) resPermintaan = (b - z) / (b - a);
-	if (z <= a) resPermintaan = 1;
-	if (z >= b) resPermintaan = 0;
-	return resPermintaan;
+	float resFx;
+	if ((z >= a) && (z < b)) resFx = (b - z) / (b - a);
+	if (z <= a) resFx = 1;
+	if (z >= b) resFx = 0;
+	return resFx;
 }
 
-float imfPersediaan(float a, float b, float z) 
+// membership function naik/banyak/bertambah
+float imfUp(float a, float b, float z)
 {
-	float resPersediaan;
-	if ((z >= a) && (z < b)) resPersediaan = (z - a) / (b - a);
-	if (z <= a) resPersediaan = 0;
-	if (z >= b) resPersediaan = 1;
-	return resPersediaan;
+	float resFy;
+	if ((z >= a) && (z < b)) resFy = (z - a) / (b - a);
+	if (z <= a) resFy = 0;
+	if (z >= b) resFy = 1;
+	return resFy;
 }
 
 float min(float a, float b) 
 {
-	float res;
-	a < b ? res = a : res = b;
-	return res;
+	return a < b ? a : b;
 }
 
 void main() // Fuzzy Logic (Percobaan)
 {
 	float u1x, u2x, u1y, u2y;
-	/*float minR1, minR2, minR3, minR4;
-	float proR1, proR2, proR3, proR4;*/
 	float num = 0, denum = 0, coaResult;
 	vector <float> minVal;
 	vector <float> proVal;
@@ -57,17 +56,17 @@ void main() // Fuzzy Logic (Percobaan)
 	cout << "Permintaan: " << permintaan << " | Persediaan: " << persediaan << endl;
 	cout << "Berapa jumlah produksi?" << endl << endl;
 
-	// fuzzyfication
+	// fuzzyfikasi
 	cout << "Input Membership Function:" << endl;
-	u1x = imfPermintaan(1000, 5000, permintaan);
-	u2x = imfPersediaan(1000, 5000, permintaan);
+	u1x = imfDown(1000, 5000, permintaan);
+	u2x = imfUp(1000, 5000, permintaan);
 	printf("Permintaan -> turun: %.2f | naik: %.2f\n", u1x, u2x);
-	u1y = imfPermintaan(100, 600, persediaan);
-	u2y = imfPersediaan(100, 600, persediaan);
+	u1y = imfDown(100, 600, persediaan);
+	u2y = imfUp(100, 600, persediaan);
 	printf("Persediaan -> sedikit: %.2f | banyak: %.2f\n", u1y, u2y);
 	cout << endl;
 
-	// interference
+	// interferensi
 	cout << "Interference System:" << endl;
 	// rule 1: IF Permintaan TURUN And Persediaan BANYAK THEN Produksi Barang BERKURANG
 	minVal.push_back(min(u1x, u2y));
@@ -91,12 +90,12 @@ void main() // Fuzzy Logic (Percobaan)
 	printf("Produksi bertambah: %.0f\n", proVal[proVal.size()-1]);
 	cout << endl;
 
-	// defuzzyfication
+	// defuzzyfikasi
 	cout << "Output:" << endl;
 	for (int i = 0; i < minVal.size(); i++) {
 		num += minVal[i] * proVal[i];
 		denum += minVal[i];
 	}
 	coaResult = num / denum;
-	cout << "Jumlah produksi: " << coaResult << endl;
+	cout << "Jumlah produksi: " << round(coaResult) << endl;
 }
